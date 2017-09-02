@@ -580,18 +580,17 @@ bool FAL::Apply( void ){
 									wxMessageBox( _("Error on Write operation to Process RAM"), _("FATAL ERROR") );
 								wr += 4;
 							}
-						success*=true;
 						#endif
 						}
 					else{
 						wxFile::Seek(StartSector*BlockRWSize);
-						success*=Write(bfr, rd_size);//*= to make update success true or false
+						success = Write(bfr, rd_size) && success;
 						}
 					delete [] bfr;
 					}
 				else{
 					//if already written and makeing undo, than use old_data
-					success*=Write((DiffArray[i]->flag_commit ? DiffArray[i]->old_data : DiffArray[i]->new_data), DiffArray[i]->size);
+					success = Write((DiffArray[i]->flag_commit ? DiffArray[i]->old_data : DiffArray[i]->new_data), DiffArray[i]->size) && success;
 					}
 				if( success )
 					DiffArray[i]->flag_commit = DiffArray[i]->flag_commit ? false : true;	//alter state of commit flag
