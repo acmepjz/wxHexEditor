@@ -1443,7 +1443,7 @@ inline wxString wxHexTextCtrl::FilterMBBuffer( const char *str, int Len, int fon
 				if( ch>=0x40 && ch!=0x7F && ch<=0xFC ){		//Second byte of a double-byte JIS X 0208 character
 					z=wxString( str+i, SJISConv, 2);
 					if(z.Len()>0){
-						ret+=z + wxT(" ");
+						ret += z +wxChar(0x200B); // add zero width space since it is already two characters wide
 						i++;
 						}
 					else
@@ -1466,7 +1466,7 @@ inline wxString wxHexTextCtrl::FilterMBBuffer( const char *str, int Len, int fon
 				if(ch>=0xA1 && ch<=0xFE){
 					z=wxString( str+i, wxCSConv(wxFONTENCODING_CP949), 2);
 					if(z.Len()>0){
-						ret+=z + wxT(" ");
+						ret += z +wxChar(0x200B); // add zero width space since it is already two characters wide
 						i++;
 						}
 					else
@@ -1497,7 +1497,7 @@ inline wxString wxHexTextCtrl::FilterMBBuffer( const char *str, int Len, int fon
 					z=wxString(str+i, Big5Conv, 2);
 					if( z.Len() > 0){
 						ret+=z;
-						ret+=wxT(" ");
+						ret+=wxChar(0x200B); // add zero width space since it is already two characters wide
 						i+=1;
 					}
 					else
@@ -1540,7 +1540,7 @@ inline wxString wxHexTextCtrl::FilterMBBuffer( const char *str, int Len, int fon
 					){
 					z = wxString(str + i, wxCSConv((wxFontEncoding)fontenc), 2);
 					if(z.Len()>0){
-						ret+=z + wxT(" ");
+						ret += z +wxChar(0x200B); // add zero width space since it is already two characters wide
 						i++;
 						}
 					else
