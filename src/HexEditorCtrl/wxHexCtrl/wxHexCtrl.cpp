@@ -1511,16 +1511,16 @@ inline wxString wxHexTextCtrl::FilterMBBuffer( const char *str, int Len, int fon
 			}
 		}
 
-	else if(fontenc==wxFONTENCODING_CP936){//"GBK"
+	else if(fontenc==wxFONTENCODING_CP936 || fontenc==wxFONTENCODING_GB2312){//"GBK"
 ///		range 		byte 1 	byte 2 				cp 		GB 18030 GBK 1.0 	CP936 	GB 2312
-///	Level GBK/1 	A1–A9 	A1–FE 				846 		728 		717 		702 		682
-///	Level GBK/2 	B0–F7 	A1–FE 				6,768 	6,763 	6,763 	6,763		6,763
-///	Level GBK/3 	81–A0 	40–FE except 7F 	6,080 	6,080		6,080 	6,080
-///	Level GBK/4 	AA–FE 	40–A0 except 7F 	8,160 	8,160 	8,160 	8,080
-///	Level GBK/5 	A8–A9 	40–A0 except 7F 	192 		166 		166 		166
-///	user-defined 	AA–AF 	A1–FE 				564
-///	user-defined 	F8–FE 	A1–FE 				658
-///	user-defined 	A1–A7 	40–A0 except 7F 	672
+///	Level GBK/1 	A1--A9 	A1--FE 				846 		728 		717 		702 		682
+///	Level GBK/2 	B0--F7 	A1--FE 				6,768 	6,763 	6,763 	6,763		6,763
+///	Level GBK/3 	81--A0 	40--FE except 7F 	6,080 	6,080		6,080 	6,080
+///	Level GBK/4 	AA--FE 	40--A0 except 7F 	8,160 	8,160 	8,160 	8,080
+///	Level GBK/5 	A8--A9 	40--A0 except 7F 	192 		166 		166 		166
+///	user-defined 	AA--AF 	A1--FE 				564
+///	user-defined 	F8--FE 	A1--FE 				658
+///	user-defined 	A1--A7 	40--A0 except 7F 	672
 ///	total: 												23,940 	21,897 	21,886 	21,791 	7,445
 		for( int i=0 ; i< Len ; i++){
 			unsigned char ch1 = str[i];
@@ -1538,7 +1538,7 @@ inline wxString wxHexTextCtrl::FilterMBBuffer( const char *str, int Len, int fon
 					(ch1>=0xF8 && ch1<=0xFE && ch2>=0xA1 && ch2<=0xFE) || //user-defined
 					(ch1>=0xA1 && ch1<=0xA7 && ch2>=0x40 && ch2<=0xA0 && ch2!=0x7F) //user-defined
 					){
-					z=wxString( str+i, wxCSConv(wxFONTENCODING_CP949), 2);
+					z = wxString(str + i, wxCSConv((wxFontEncoding)fontenc), 2);
 					if(z.Len()>0){
 						ret+=z + wxT(" ");
 						i++;
