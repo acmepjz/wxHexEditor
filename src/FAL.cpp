@@ -107,6 +107,8 @@ FAL::FAL(wxFileName& myfilename, FileAccessMode FAM, unsigned ForceBlockRW ){
 #endif
 	}
 
+#define or ||
+
 #ifdef __WXMSW__
 HANDLE GetDDK(PCWSTR a);
 

@@ -12,11 +12,11 @@
 #include <mutils/mtypes.h>
 #include <mutils/mutils.h>
 
-#ifdef WIN32
-# define WIN32DLL_DEFINE __declspec( dllexport)
-#else
+// #ifdef WIN32
+// # define WIN32DLL_DEFINE __declspec( dllexport)
+// #else
 # define WIN32DLL_DEFINE
-#endif
+// #endif
 
 #define RAND32 (mutils_word32) ((mutils_word32)rand() << 17 ^ (mutils_word32)rand() << 9 ^ rand())
 

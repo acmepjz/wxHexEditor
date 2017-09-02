@@ -558,7 +558,7 @@ inline wxDC* wxHexCtrl::UpdateDC(wxDC *xdc ){
 
 					//First half of byte
 					RenderedHexByte += CharAt(textLenghtLimit++);
-					chr = RenderedHexByte.ToAscii()[0];
+					chr = RenderedHexByte.ToAscii().operator[](0);
 					chrC = atoh( chr ) << 4;
 
 					//Space could be here
@@ -570,7 +570,7 @@ inline wxDC* wxHexCtrl::UpdateDC(wxDC *xdc ){
 
 					//Second half of byte.
 					RenderedHexByte += CharAt(textLenghtLimit++);
-					chr = RenderedHexByte.ToAscii()[1];
+					chr = RenderedHexByte.ToAscii().operator[](1);
 					chrC |= atoh( chr );
 					//chrC = (atoh( RenderedHexByte.ToAscii()[0] ) << 4) | atoh( RenderedHexByte.ToAscii()[1] );
 
@@ -1706,9 +1706,9 @@ wxArrayString GetSupportedEncodings(void){
 					wxT("EBCDIC  875 - IBM Greek"),
 					wxT("EBCDIC 1026 - IBM Latin 5 Turkish"),
 					wxT("EBCDIC 1047 - IBM Latin 1"),
-					wxT("EBCDIC 1140 - IBM U.S. Canada with €"),
-					wxT("EBCDIC 1146 - IBM Ireland U.K. with €"),
-					wxT("EBCDIC 1148 - IBM International with €"),
+					wxT("EBCDIC 1140 - IBM U.S. Canada with \x20AC"),
+					wxT("EBCDIC 1146 - IBM Ireland U.K. with \x20AC"),
+					wxT("EBCDIC 1148 - IBM International with \x20AC"),
 					wxT("*ANSEL - American National Standard for Extended Latin"),
 					wxT("DEC Multinational Character Set - VT220"),
 					wxT("OEM - IBM PC/DOS CP437 - MS-DOS Latin US"),

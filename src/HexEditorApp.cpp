@@ -175,3 +175,11 @@ void wxHexEditorApp::OnMouseMove(wxMouseEvent &event){
 	return;
 	}
 #endif
+
+#ifdef __WXMSW__
+
+int main() {
+	return WinMain(GetModuleHandleW(NULL), NULL, NULL, SW_SHOW);
+}
+
+#endif

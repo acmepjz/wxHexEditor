@@ -2087,7 +2087,7 @@ void CopyAsDialog::Copy( void ){
 				case 8: cb += wxT("int64_t"); break;
 				}
 
-			cb+=wxString::Format( wxT(" hexData[0x%x] = {" wxNewline "  "), count );
+			cb+=wxString::Format( wxT(" hexData[0x%x] = {") wxNewline wxT("  "), count );
 			bool bigEndianSwapReq = chkBigEndian->GetValue() && chcOption->GetSelection();//No big endian for 8 bit
 			int b;
 			int limit=(bigEndianSwapReq ? -1 : HexSize);
@@ -2105,7 +2105,7 @@ void CopyAsDialog::Copy( void ){
 //					case 8: cb+= wxString::Format( wxT("0x%016" wxLongLongFmtSpec "X, "), *reinterpret_cast<uint64_t*>( buff.GetData()+current_offset*HexSize )); break;
 //					}
 				if(( (current_offset+1) % (BytePerLine/HexSize)==0 ) && current_offset != count)
-						cb += wxT("" wxNewline "  ");
+						cb += wxNewline wxT("  ");
 				}
 			cb=cb.BeforeLast(',')+wxT(" }" wxNewline);
 		   }
@@ -2116,10 +2116,10 @@ void CopyAsDialog::Copy( void ){
 
 			wxString HexFormat;
 			switch( HexSize ){
-				case 1: HexFormat += wxT("" wxNewline "db "); break;
-				case 2: HexFormat += wxT("" wxNewline "dw "); break;
-				case 4: HexFormat += wxT("" wxNewline "dd "); break;
-				case 8: HexFormat += wxT("" wxNewline "dq "); break;
+				case 1: HexFormat += wxNewline wxT("db "); break;
+				case 2: HexFormat += wxNewline wxT("dw "); break;
+				case 4: HexFormat += wxNewline wxT("dd "); break;
+				case 8: HexFormat += wxNewline wxT("dq "); break;
 				}
 
 			bool bigEndianSwapReq = chkBigEndian->GetValue() && chcOption->GetSelection();//No big endian for 8 bit

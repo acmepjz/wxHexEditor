@@ -123,7 +123,7 @@ void windowsHDD::list_devices() {
 //		}
 
 	//Add logical Drives here directly.
-	uint32_t drives=GetLogicalDrives();
+	unsigned int drives=GetLogicalDrives();
 		for(int i=2; i<32 ; i++){	//i=2 drops A: and B: flopies if available
 			if((drives>>i) & 0x01 ){
 				//printf("%c: ", 'A' + i);
