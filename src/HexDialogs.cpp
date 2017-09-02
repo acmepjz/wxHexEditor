@@ -2895,6 +2895,11 @@ PreferencesDialog::PreferencesDialog( wxWindow* parent ):PreferencesDialogGui(pa
 	chcCharacterEncodingFamily->Clear();
 	chcCharacterEncoding->Clear();
 
+#ifdef __WXMSW__
+	SendMessageW(chcCharacterEncodingFamily->GetHWND(), CB_SETDROPPEDWIDTH, 640, 0);
+	SendMessageW(chcCharacterEncoding->GetHWND(), CB_SETDROPPEDWIDTH, 640, 0);
+#endif
+
 	wxArrayString ChrEncFamArray;
 	ChrEncFamArray.Add(wxT("Code for Information Interchange"));
 	ChrEncFamArray.Add(wxT("DOS"));
